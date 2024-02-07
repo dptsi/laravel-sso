@@ -4,7 +4,6 @@ namespace Dptsi\Sso\Providers;
 
 use Dptsi\Sso\Core\SsoManager;
 use Dptsi\Sso\Middleware\Sso;
-use Illuminate\Contracts\Container\BindingResolutionException;
 use Illuminate\Routing\Router;
 use Illuminate\Support\ServiceProvider;
 
@@ -24,7 +23,7 @@ class SsoServiceProvider extends ServiceProvider
      * Bootstrap services.
      *
      * @return void
-     * @throws BindingResolutionException
+     * @throws \Illuminate\Contracts\Container\BindingResolutionException
      */
     public function boot()
     {

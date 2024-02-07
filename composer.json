@@ -8,12 +8,10 @@
       "email": "developer@its.ac.id"
     }
   ],
-  "minimum-stability": "dev",
   "require": {
-    "php": "^7.4|8.0.*|8.1.*|8.2.*",
-    "laravel/framework": "^8.12",
-    "myits/openid-connect-client": "^1.4.0",
-    "ramsey/uuid": "^4.0.0",
+    "php": "^8.0.2",
+    "laravel/framework": "^9.21|^10.0",
+    "myits/openid-connect-client": "^1.4",
     "ext-json": "*"
   },
   "autoload": {
@@ -30,5 +28,7 @@
         "Dptsi\\Sso\\Providers\\SsoServiceProvider"
       ]
     }
-  }
-  }
+  },
+  "minimum-stability": "dev",
+  "prefer-stable": true
+}
