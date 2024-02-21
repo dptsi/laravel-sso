@@ -12,7 +12,10 @@ class Sso
     {
         if (\Dptsi\Sso\Facade\Sso::check()) {
             if (empty(\Dptsi\Sso\Facade\Sso::user()->getRoles())) {
-                return response()->view('Sso::illegitimate-role', [ 'provider' => config('openid.provider') ]);
+                return response()->view(
+                    config('openid.view_forbidden', 'Sso::illegitimate-role'),
+                    [ 'provider' => config('openid.provider') ],
+                );
             }
             return $next($request);
         }

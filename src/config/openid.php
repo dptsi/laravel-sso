@@ -12,4 +12,5 @@ return [
         'Role2',
         'Role3'
     ],
+    'view_forbidden'            => 'Sso::illegitimate-role'
 ];
