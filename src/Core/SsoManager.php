@@ -72,6 +72,9 @@ class SsoManager
         if (!empty($user->getRoles()) && empty($user->getActiveRole()))
             $user->setActiveRole($user->getRoles()[0] ?? null);
 
+        Session::put('sso.original_groups', $userInfo->group);
+        Session::put('sso.original_roles', $userInfo->role);
+
         Session::put('sso.user', serialize($user));
 
         Session::put('sso.id_token', $oidc->getIdToken());
