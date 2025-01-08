@@ -17,6 +17,7 @@ class User
     private ?string $zoneinfo;
     private ?string $locale;
     private ?string $username;
+    private ?string $reg_id;
 
     // email claim
     private ?string $email;
@@ -74,7 +75,8 @@ class User
         ?string $phone,
         ?bool $phone_verified,
         ?array $resources,
-        ?string $integra_id
+        ?string $integra_id,
+        ?string $reg_id,
     ) {
         $this->id = $id;
         $this->name = $name;
@@ -95,6 +97,7 @@ class User
         $this->active_role = null;
         $this->resources = $resources;
         $this->integra_id = $integra_id;
+        $this->reg_id = $reg_id;
     }
 
     /**
@@ -167,6 +170,14 @@ class User
     public function getUsername(): ?string
     {
         return $this->username;
+    }
+
+    /**
+     * @return string|null
+     */
+    public function getRegId(): ?string
+    {
+        return $this->reg_id;
     }
 
     /**

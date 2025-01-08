@@ -47,6 +47,7 @@ class SsoManager
             $userInfo->phone_verified ?? null,
             $userInfo->resource ? json_decode(json_encode($userInfo->resource), true) : null,
             $userInfo->integra_id ?? null,
+            $userInfo->reg_id ?? null,
         );
 
         foreach ($userInfo->group as $group) {
