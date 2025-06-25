@@ -10,7 +10,7 @@
   ],
   "require": {
     "php": "^8.0.2",
-    "laravel/framework": "^8.75|^9.21|^10.0|^11.0",
+    "laravel/framework": "^8.75|^9.21|^10.0|^11.0|^12.0",
     "myits/openid-connect-client": "^1.4",
     "ext-json": "*"
   },
