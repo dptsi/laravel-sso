@@ -8,7 +8,7 @@ use Dptsi\Sso\Models\User;
 use Dptsi\Sso\Requests\OidcLoginRequest;
 use Dptsi\Sso\Requests\OidcLogoutRequest;
 use Illuminate\Support\Facades\Session;
-use Its\Sso\OpenIDConnectClient;
+use Jumbojett\OpenIDConnectClient;
 
 class SsoManager
 {
@@ -18,7 +18,11 @@ class SsoManager
 
         $oidc->setRedirectURL($request->getRedirectUri());
 
-        $oidc->addScope($request->getScope());
+        $scope = $request->getScope();
+        if (is_string($scope)) {
+            $scope = explode(' ', $scope);
+        }
+        $oidc->addScope($scope);
 
         if (strtolower(config('app.env')) != 'production' && strtolower(config('app.env')) != 'prod') {
             $oidc->setVerifyHost(false);
