@@ -115,7 +115,12 @@ class SsoManager
 
     public function user(): ?User
     {
-        return unserialize(Session::get('sso.user'));
+        $user = unserialize(Session::get('sso.user'));
+        if ($user instanceof User) {
+            return $user;
+        }
+        
+        return null;
     }
 
     public function set(User $user): void
