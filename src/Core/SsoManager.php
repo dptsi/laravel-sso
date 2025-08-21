@@ -101,6 +101,15 @@ class SsoManager
 
         $oidc = new OpenIDConnectClient($request->getProvider(), $request->getClientId(), $request->getClientSecret());
 
+        $prefetchedConfig = $request->getPrefetchedConfig();
+        if ($prefetchedConfig) {
+            $oidc->providerConfigParam(json_decode($prefetchedConfig, true));
+        }
+        $prefetchedJwks = $request->getPrefetchedJwks();
+        if ($prefetchedJwks) {
+            $oidc->setJwks(json_decode($prefetchedJwks, true));
+        }
+
         if (strtolower(config('app.env')) != 'production' && strtolower(config('app.env')) != 'prod') {
             $oidc->setVerifyHost(false);
             $oidc->setVerifyPeer(false);
