@@ -12,4 +12,6 @@ return [
         'Role2',
         'Role3'
     ],
+    'prefetched_config'         => env('OPENID_PREFETCHED_CONFIG'),
+    'prefetched_jwks'           => env('OPENID_PREFETCHED_JWKS'),
 ];

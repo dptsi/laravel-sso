@@ -16,6 +16,15 @@ class SsoManager
     {
         $oidc = new OpenIDConnectClient($request->getProvider(), $request->getClientId(), $request->getClientSecret());
 
+        $prefetchedConfig = $request->getPrefetchedConfig();
+        if ($prefetchedConfig) {
+            $oidc->providerConfigParam(json_decode($prefetchedConfig, true));
+        }
+        $prefetchedJwks = $request->getPrefetchedJwks();
+        if ($prefetchedJwks) {
+            $oidc->setJwks(json_decode($prefetchedJwks, true));
+        }
+
         $oidc->setRedirectURL($request->getRedirectUri());
 
         $oidc->addScope($request->getScope());
@@ -27,7 +36,7 @@ class SsoManager
 
         $oidc->authenticate();
 
-        $userInfo = $oidc->requestUserInfo();
+        $userInfo = json_decode(json_encode($oidc->getIdTokenPayload()));
 
         $user = new User(
             $userInfo->sub,

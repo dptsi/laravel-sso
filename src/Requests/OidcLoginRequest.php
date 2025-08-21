@@ -10,9 +10,11 @@ class OidcLoginRequest
     private $redirectUri;
     private $scope;
     private $allowedRoles;
+    private $prefetchedConfig;
+    private $prefetchedJwks;
 
     public function __construct(
-        $provider, $clientId, $clientSecret, $redirectUri, $scope, $allowedRoles
+        $provider, $clientId, $clientSecret, $redirectUri, $scope, $allowedRoles, $prefetchedConfig = null, $prefetchedJwks = null,
     )
     {
         $this->provider = $provider;
@@ -21,6 +23,8 @@ class OidcLoginRequest
         $this->redirectUri = $redirectUri;
         $this->scope = $scope;
         $this->allowedRoles = $allowedRoles;
+        $this->prefetchedConfig = $prefetchedConfig;
+        $this->prefetchedJwks = $prefetchedJwks;
     }
 
     public function getProvider()
@@ -51,5 +55,15 @@ class OidcLoginRequest
     public function getAllowedRoles()
     {
         return $this->allowedRoles;
+    }
+
+    public function getPrefetchedConfig()
+    {
+        return $this->prefetchedConfig;
+    }
+
+    public function getPrefetchedJwks()
+    {
+        return $this->prefetchedJwks;
     }
 }
