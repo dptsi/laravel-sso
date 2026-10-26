@@ -4,8 +4,8 @@ A helper package for ITS SSO authentication in laravel framework
 
 ## Requirements
 
-1. PHP 7.4 or greater
-2. Laravel version 8
+1. PHP 8.0 or greater (compatible up to PHP 8.5)
+2. Laravel version 8 - 13
 3. myits/openid-connect-client
 
 ## Installation
