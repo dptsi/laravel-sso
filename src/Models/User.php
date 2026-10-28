@@ -289,7 +289,12 @@ class User
      */
     public function canRead(string $path): bool
     {
-        foreach ($this->resources[$this->getActiveRole()->getName()] as $resource) {
+        $activeRole = $this->getActiveRole();
+        if ($activeRole === null) {
+            return false;
+        }
+
+        foreach ($this->resources[$activeRole->getName()] ?? [] as $resource) {
             if ($resource['path'] === $path) {
                 return true;
             }
@@ -336,7 +341,12 @@ class User
      */
     private function can(string $action, string $path): bool
     {
-        foreach ($this->resources[$this->getActiveRole()->getName()] as $resource) {
+        $activeRole = $this->getActiveRole();
+        if ($activeRole === null) {
+            return false;
+        }
+
+        foreach ($this->resources[$activeRole->getName()] ?? [] as $resource) {
             if ($resource['path'] === $path && $resource[$action]) {
                 return true;
             }
