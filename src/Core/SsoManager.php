@@ -44,7 +44,7 @@ class SsoManager
             $userInfo->nickname ?? null,
             $userInfo->picture ?? null,
             $userInfo->gender ?? null,
-            $userInfo->birthdate ? new Carbon($userInfo->birthdate) : null,
+            !empty($userInfo->birthdate) ? new Carbon($userInfo->birthdate) : null,
             $userInfo->zoneinfo ?? null,
             $userInfo->locale ?? null,
             $userInfo->preferred_username ?? null,
@@ -54,27 +54,27 @@ class SsoManager
             $userInfo->alternate_email_verified ?? null,
             $userInfo->phone ?? null,
             $userInfo->phone_verified ?? null,
-            $userInfo->resource ? json_decode(json_encode($userInfo->resource), true) : null,
+            !empty($userInfo->resource) ? json_decode(json_encode($userInfo->resource), true) : null,
             $userInfo->integra_id ?? null,
             $userInfo->reg_id ?? null,
         );
 
-        foreach ($userInfo->group as $group) {
+        foreach ($userInfo->group ?? [] as $group) {
             if (in_array($group->group_name, config('openid.allowed_roles'))) {
                 $user->addUserRole(new Role($group->group_name, null, null, null));
             }
         }
 
-        foreach ($userInfo->role as $role) {
+        foreach ($userInfo->role ?? [] as $role) {
             if (in_array($role->role_name, config('openid.allowed_roles'))) {
                 $newRole = new Role(
                     $role->role_name,
-                    $role->org_id,
-                    $role->org_name,
-                    $role->expired_at ? new Carbon($role->expired_at) : null,
+                    $role->org_id ?? null,
+                    $role->org_name ?? null,
+                    !empty($role->expired_at) ? new Carbon($role->expired_at) : null,
                 );
                 $user->addUserRole($newRole);
-                if ($role->is_default === '1')
+                if (($role->is_default ?? null) === '1')
                     $user->setActiveRole($newRole);
             }
         }
